@@ -62,7 +62,7 @@ export const parseHtmlForImages = (htmlContent: string): ParsedImageData[] => {
         if (bsTarget) {
           // Extract number from data-bs-target (assuming format like "#part1")
           const match = bsTarget.match(/\d+/);
-          if (match) {
+          if (match&&sections) {
             const index = parseInt(match[0], 10); 
             if (index >= 0 && index < sections.length) {
               const section = sections[index];

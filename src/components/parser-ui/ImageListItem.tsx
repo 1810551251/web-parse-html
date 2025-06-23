@@ -8,7 +8,7 @@ import { ExternalLink, Edit3, Save, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ImagePreviewHover } from './ImagePreviewHover';
 import { useAppStore } from '@/store/appStore';
-
+import Image from 'next/image';
 interface ImageListItemProps {
   item: ParsedImageData;
   isSelected: boolean;
@@ -51,12 +51,15 @@ export const ImageListItem = React.memo(({ item, isSelected, onToggleSelect }: I
 
         <ImagePreviewHover src={item.thumbnailSrc} alt={item.alt || 'Thumbnail preview'}>
           <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-muted rounded overflow-hidden cursor-pointer">
-            <img
-              src={item.thumbnailSrc}
-              alt={item.alt || 'Parsed image'}
-              className="w-full h-full object-cover"
-              loading="lazy"
+            <Image
+              src={item.originalSrc}
+              alt={item.description || 'Image'}
+              width={200} // Set appropriate width
+              height={200} // Set appropriate height
+              className="object-cover rounded-md"
+              // Add any other props you need
             />
+            
           </div>
         </ImagePreviewHover>
 
@@ -116,3 +119,5 @@ export const ImageListItem = React.memo(({ item, isSelected, onToggleSelect }: I
     </Card>
   );
 });
+
+ImageListItem.displayName = 'ImageListItem';

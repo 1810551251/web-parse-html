@@ -52,8 +52,8 @@ export const useImageParser = () => {
   useEffect(() => {
     if (isSuccess && data) {
       try {
-        // Assume parseHtmlForImages can throw an error if parsing fails
-        const imageUrls = parseHtmlForImages(data); // Pass url as base for relative paths
+        const htmlContent = typeof data === 'string' ? data : String(data);
+        const imageUrls = parseHtmlForImages(htmlContent); 
         setImages(imageUrls);
         setStatus('success');
         if (imageUrls.length > 0) {

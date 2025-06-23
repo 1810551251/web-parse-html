@@ -17,5 +17,11 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
+  
+  "rules": {
+    "react/display-name": "off",
+    "@next/next/no-img-element": "off",
+    "react/no-unescaped-entities": "off"
+  },
   "iconLibrary": "lucide"
 }

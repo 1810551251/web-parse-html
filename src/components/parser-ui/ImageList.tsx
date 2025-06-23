@@ -1,18 +1,18 @@
 import React, { useState, useMemo } from 'react';
-import { ParsedImageData } from '@/types';
+
 import { ImageListItem } from './ImageListItem';
 import { Input } from '@/components/ui/input';
 import { useImageSelection } from '@/hooks/useImageSelection';
 import { useAppStore } from '@/store/appStore';
 import { Button } from '@/components/ui/button';
 import { ImageListSkeleton } from './SkeletonLoader';
-import { FileDown, Trash2, CheckSquare, Square } from 'lucide-react';
+import { FileDown,  CheckSquare, Square } from 'lucide-react';
 
 export const ImageList = () => {
   const images = useAppStore(state => state.images);
   const status = useAppStore(state => state.status);
   const [filter, setFilter] = useState('');
-  const { selectedIds, toggleSelection, clearSelection, selectAll, setSelectedIds } = useImageSelection(true); // Enable multi-select
+  const { selectedIds, toggleSelection, clearSelection, selectAll } = useImageSelection(true); // Enable multi-select
 
   const filteredItems = useMemo(() => {
     if (!filter) return images;
@@ -31,26 +31,6 @@ export const ImageList = () => {
   };
 
 
-  //   const handleExportSelected = () => {
-  //     const selectedImages = images.filter(img => selectedIds.includes(img.id));
-  //     if (selectedImages.length === 0) {
-  //         alert("没选中任何图片.");
-  //         return;
-  //     }
-      
-  //     // Extract originalSrc values and join with newlines
-  //     const srcValues = selectedImages.map(img => img.originalSrc).join('\n');
-      
-  //     // Create text file data URL
-  //     const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(srcValues);
-      
-  //     const downloadAnchorNode = document.createElement('a');
-  //     downloadAnchorNode.setAttribute("href", dataStr);
-  //     downloadAnchorNode.setAttribute("download", "image_sources.txt");
-  //     document.body.appendChild(downloadAnchorNode);
-  //     downloadAnchorNode.click();
-  //     downloadAnchorNode.remove();
-  // };
 
   const handleExportSelected = () => {
     const emptyLinesCount = 5;
@@ -85,7 +65,7 @@ export const ImageList = () => {
   if (status === 'idle' || (status === 'success' && images.length === 0 && !filter)) {
      // Don't show "No images found" if there was an error, or user is typing filter before parsing.
      if (status === 'success' && images.length === 0) {
-        return <p className="mt-6 text-center text-muted-foreground">No images found matching the criteria from the URL.</p>;
+        return <p className="mt-6 text-center text-muted-foreground">这个网址没有符合要求的图片.</p>;
      }
     return null; // Or a placeholder to input URL
   }
@@ -126,7 +106,10 @@ export const ImageList = () => {
       )}
 
       {filteredItems.length === 0 && filter && (
-        <p className="text-center text-muted-foreground py-4">没有符合筛选的图片 "{filter}".</p>
+        <p className="text-center text-muted-foreground py-4">
+          没有符合筛选的图片 &quot;{filter}&quot;.
+        </p>
+
       )}
       {filteredItems.length === 0 && !filter && images.length > 0 && (
          <p className="text-center text-muted-foreground py-4">所有图像已被过滤掉.</p>
