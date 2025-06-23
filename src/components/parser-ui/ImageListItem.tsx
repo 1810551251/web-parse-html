@@ -116,3 +116,5 @@ export const ImageListItem = React.memo(({ item, isSelected, onToggleSelect }: I
     </Card>
   );
 });
+
+ImageListItem.displayName = 'ImageListItem';
