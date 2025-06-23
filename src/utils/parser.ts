@@ -25,8 +25,7 @@ const parsePictureElement = (pictureElement: HTMLPictureElement): ParsedImageDat
 export const parseHtmlForImages = (htmlContent: string): ParsedImageData[] => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlContent, 'text/html').querySelector('article');
-  
-  // console.log("网页结构为:", doc);
+
   
   const results: ParsedImageData[] = [];
 
@@ -50,7 +49,9 @@ export const parseHtmlForImages = (htmlContent: string): ParsedImageData[] => {
 
 
   const catalogAnchor = doc?.querySelector('div.catalog-anchor');
-  if (catalogAnchor) {
+
+  if (catalogAnchor&&(listElements?.length==0)) {
+    
     const hotTags = catalogAnchor.querySelectorAll('.hot-tag');
     const sections = doc?.querySelectorAll('section.part');
   
