@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import type { ParsedImageData } from '@/types';
+
 import { ImageListItem } from './ImageListItem';
 import { Input } from '@/components/ui/input';
 import { useImageSelection } from '@/hooks/useImageSelection';
 import { useAppStore } from '@/store/appStore';
 import { Button } from '@/components/ui/button';
 import { ImageListSkeleton } from './SkeletonLoader';
-import { FileDown, Trash2, CheckSquare, Square } from 'lucide-react';
+import { FileDown,  CheckSquare, Square } from 'lucide-react';
 
 export const ImageList = () => {
   const images = useAppStore(state => state.images);
@@ -106,7 +106,9 @@ export const ImageList = () => {
       )}
 
       {filteredItems.length === 0 && filter && (
-        <p className="text-center text-muted-foreground py-4">没有符合筛选的图片 "{filter}".</p>
+        <p className="text-center text-muted-foreground py-4">
+          没有符合筛选的图片 &quot;{filter}&quot;.
+        </p>
       )}
       {filteredItems.length === 0 && !filter && images.length > 0 && (
          <p className="text-center text-muted-foreground py-4">所有图像已被过滤掉.</p>
