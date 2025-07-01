@@ -13,7 +13,7 @@ export const ImageList = () => {
   const status = useAppStore(state => state.status);
   const [filter, setFilter] = useState('');
   const { selectedIds, toggleSelection, clearSelection, selectAll } = useImageSelection(true); // Enable multi-select
-  // 从.env文件中读取GAP_LINE变量
+  
   
   const filteredItems = useMemo(() => {
     if (!filter) return images;
@@ -35,7 +35,7 @@ export const ImageList = () => {
 
   const handleExportSelected = () => {
     // 间隔行数
-    const emptyLinesCount = 50;
+    const emptyLinesCount = 20;
     const selectedImages = images.filter(img => selectedIds.includes(img.id));
     if (selectedImages.length === 0) {
         alert("没选中任何图片.");
